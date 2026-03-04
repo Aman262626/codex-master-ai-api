@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: codex-master-ai-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: REQUIRE_AUTH
+        value: "false"
+      - key: SITE_URL
+        value: "https://codex-master-api.onrender.com"
+    healthCheckPath: /health
